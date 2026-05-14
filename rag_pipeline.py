@@ -13,6 +13,11 @@ API_KEY = os.getenv("DEEPINFRA_API_KEY")
 embedding_model = HuggingFaceEmbeddings(
     model_name="sentence-transformers/all-MiniLM-L6-v2"
 )
+import os
+import ingest
+
+if not os.path.exists("vectorstore"):
+    ingest.build_vectorstore()
 
 # Load vector DB
 vectorstore = Chroma(

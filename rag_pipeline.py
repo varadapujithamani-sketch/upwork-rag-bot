@@ -7,7 +7,9 @@ from langchain_community.vectorstores import Chroma
 from langchain_community.embeddings import HuggingFaceEmbeddings
 load_dotenv()
 
-API_KEY = os.getenv("DEEPINFRA_API_KEY")
+import streamlit as st
+
+API_KEY = st.secrets["DEEPINFRA_API_KEY"]
 
 # Load embedding model
 embedding_model = HuggingFaceEmbeddings(
@@ -92,6 +94,12 @@ def generate_response(question, context):
     )
 
     result = response.json()
+
+    print("API RESPONSE:")
+    print(result)
+
+    if "choices" not in result:
+        return f"API Error: {result}"
 
     return result["choices"][0]["message"]["content"]
 

@@ -42,14 +42,12 @@ Do not assume information.
 
 def retrieve_docs(query):
 
-    # Semantic retrieval
     semantic_docs = vectorstore.max_marginal_relevance_search(
         query,
-        k=8,
+        k=5,
         fetch_k=20
     )
 
-    # Keyword fallback
     keyword_docs = keyword_match(query, semantic_docs)
 
     if keyword_docs:

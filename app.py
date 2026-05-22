@@ -17,7 +17,8 @@ if question:
     st.subheader("Sources")
 
     for i, doc in enumerate(docs):
-        st.code(doc.page_content)
-
+        st.write(f"Source {i+1}:")
+        st.write(doc.page_content[:300])
+        
     st.subheader("Latency")
     st.write(f"{latency} seconds")
